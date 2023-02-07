@@ -4,6 +4,11 @@ use frontend::App as YewApp;
 use std::fs;
 use yew::ServerRenderer;
 
+// To run the project use
+// cd ssr-with-rust
+// cargo run
+
+
 #[get("/")]
 async fn render_yew_app(_req: HttpRequest) -> Result<HttpResponse, Error> {
     let index_html = fs::read_to_string("./frontend/dist/index.html").unwrap();
@@ -28,7 +33,7 @@ async fn main() -> std::io::Result<()> {
 
             .service(render_yew_app)
     })
-    .bind(("0.0.0.0", 80))?
+    .bind(("127.0.0.1", 3000))?
     .run()
     .await
 }
