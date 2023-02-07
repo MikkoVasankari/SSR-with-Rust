@@ -8,5 +8,4 @@ yew = { git = "https://github.com/yewstack/yew.git", features = ["ssr"]}
 frontend = { path = "../frontend" }
 actix-web = "^4"
 actix-files = "0.6"
-relative-path = "1.7.3"
-cargo-watch = "8.3.0"
+
