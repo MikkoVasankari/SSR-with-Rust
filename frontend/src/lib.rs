@@ -9,8 +9,8 @@ pub fn app() -> Html {
                 {"Blog post title"}
             </h1>
             <p>{"Date: 12.3.2000"} </p>
-            <h3 style="text-decoration: underline;">
-                {"Author: 1"}
+            <h3 >
+                {"Author: Lorem ipsum"}
             </h3>
             <p> {"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Cras id mi a quam malesuada gravida. Morbi lorem libero, porta quis ultrices ac, 
