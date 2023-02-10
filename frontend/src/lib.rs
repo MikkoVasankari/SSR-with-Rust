@@ -5,15 +5,14 @@ pub fn app() -> Html {
     return html! {
         <>
         <div>
-            {"Hello, World!"}
             <h1>
-                {"Blog post "}
+                {"Blog post title"}
             </h1>
-
+            <p>{"Date: 12.3.2000"} </p>
             <h3 style="text-decoration: underline;">
                 {"Author: 1"}
             </h3>
-            <p > {"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            <p> {"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Cras id mi a quam malesuada gravida. Morbi lorem libero, porta quis ultrices ac, 
             molestie quis est. Donec fringilla, ipsum a consequat maximus, 
             dui purus posuere tortor, et iaculis enim est at velit. Pellentesque 
