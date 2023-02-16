@@ -1,6 +1,5 @@
 use frontend::App;
 
-
 // Use trunk build
 
 fn main() {

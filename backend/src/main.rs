@@ -1,5 +1,5 @@
 use actix_files as actix_fs;
-use actix_web::{ get, App, Error, HttpRequest, HttpResponse, HttpServer };
+use actix_web::{ get, App, Error, HttpRequest, HttpResponse, HttpServer , Responder };
 use frontend::App as YewApp;
 use std::fs;
 use yew::ServerRenderer;
@@ -10,11 +10,11 @@ use yew::ServerRenderer;
 
 #[get("/")]
 async fn render_yew_app(_req: HttpRequest) -> Result<HttpResponse, Error> {
-    let index_html = fs::read_to_string("./frontend/dist/index.html").unwrap();
+    let index_html:String = fs::read_to_string("./frontend/dist/index.html").unwrap();
 
-    let renderer = ServerRenderer::<YewApp>::new();
+    let renderer:ServerRenderer::<YewApp> = ServerRenderer::<YewApp>::new();
 
-    let content = renderer.render().await;
+    let content:String = renderer.render().await;
 
     Ok(
         HttpResponse::Ok()
@@ -23,6 +23,10 @@ async fn render_yew_app(_req: HttpRequest) -> Result<HttpResponse, Error> {
     )
 }
 
+#[get("/testi")]
+async fn hello() -> impl Responder {
+    HttpResponse::Ok().body("Hello world!")
+}
 
 
 #[actix_web::main]
@@ -32,6 +36,7 @@ async fn main() -> std::io::Result<()> {
         .service(actix_fs::Files::new("/dist", "./frontend/dist"))
         
         .service(render_yew_app)
+        .service(hello)
     })
         .bind(("localhost", 3000))?
         .run()
