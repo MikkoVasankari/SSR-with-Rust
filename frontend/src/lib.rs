@@ -6,7 +6,7 @@ struct Model {
 
 #[function_component(App)]
 pub fn app() -> Html {
-    let state = use_state(|| Model { value: 0 });
+    let state = use_state(|| Model { value: 1 });
 
     let onclick = {
         if state.value == 1 {
@@ -20,23 +20,61 @@ pub fn app() -> Html {
             Callback::from(move |_| state.set(Number { value: 0 }))
         }
     };
+    if state.value == 1{
+        return html! {
+            <>
+            <div>
+    
+                <h1>
+                    {"Blog post title "} { state.value }
+                </h1>
+    
+                <button {onclick}>
+                    { "Next post"}
+                </button>
+    
+    
+                <p>{ state.value }</p>
+    
+                <p>{"Date: 12.3.2000"} </p>
+                <h2 >
+                    {"Author: Lorem ipsum"}
+                </h2>
+                <p> {"Proin id sapien eget neque mollis dapibus. 
+                Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; 
+                Nulla placerat dui vitae cursus sodales. 
+                Morbi imperdiet dolor felis, in lobortis magna viverra sollicitudin. 
+                Nunc consectetur rhoncus dolor, eu ornare leo accumsan eget. 
+                Ut et odio risus. Suspendisse at purus odio. "}
+                </p>
+    
+                <p> {"Curabitur diam justo, fermentum sed libero id, bibendum cursus eros. 
+                Maecenas ut consectetur eros, ac finibus mauris. Etiam nisi dui, porttitor et vehicula sed, 
+                vulputate vel ligula. Suspendisse leo metus, vehicula non efficitur vitae, condimentum congue est. 
+                Praesent fermentum faucibus erat. Cras fermentum ante ut dui vehicula, nec bibendum diam bibendum. 
+                Mauris eget mi eu urna aliquam mollis. "}
+                </p>
+    
+            </div>
+            </>
+        };
+    }else {
     return html! {
         <>
         <div>
 
             <h1>
-            {"Blog post title "} { state.value }
+                {"Blog post title "} { state.value }
             </h1>
 
             <button {onclick}>
-            { "Next post"}
+                { "Next post"}
             </button>
-
             <p>{ state.value }</p>
 
-            <p>{"Date: 12.3.2000"} </p>
+            <p>{"Date: 12.3.2018"} </p>
             <h2 >
-                {"Author: Lorem ipsum"}
+                {"Author: Ipsum Lorem"}
             </h2>
             <p> {"Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Cras id mi a quam malesuada gravida. Morbi lorem libero, porta quis ultrices ac, 
@@ -61,4 +99,5 @@ pub fn app() -> Html {
         </div>
         </>
     };
+    }
 }
