@@ -1,12 +1,38 @@
 use yew::prelude::*;
+use serde::{Deserialize, Serialize};
+use uuid::Uuid;
 
-struct Model {
+struct Number {
     value: i64,
 }
 
+#[derive(Serialize, Deserialize)]
+struct UuidResponse {
+    uuid: Uuid,
+}
+
+#[function_component]
+fn Content() -> HtmlResult {
+
+    async fn fetch_uuid() -> Uuid {
+        
+        let resp = reqwest::get("https://httpbin.org/uuid").await.unwrap();
+        let uuid_resp = resp.json::<UuidResponse>().await.unwrap();
+    
+        uuid_resp.uuid
+    }
+
+    let uuid = use_prepared_state!(async move |_| -> Uuid { fetch_uuid().await }, ())?.unwrap();
+
+    Ok(html! {
+        <div>{"Random UUID: "}{uuid}</div>
+    })
+}
+
+
 #[function_component(App)]
 pub fn app() -> Html {
-    let state = use_state(|| Model { value: 1 });
+    let state = use_state(|| Number { value: 1 });
 
     let onclick = {
         if state.value == 1 {
@@ -20,11 +46,14 @@ pub fn app() -> Html {
             Callback::from(move |_| state.set(Number { value: 0 }))
         }
     };
-    if state.value == 1{
+    if state.value == 1 {
+
+        let fallback = html! {<div>{"Loading..."}</div>};
+
         return html! {
+            
             <>
             <div>
-    
                 <h1>
                     {"Blog post title "} { state.value }
                 </h1>
@@ -32,9 +61,10 @@ pub fn app() -> Html {
                 <button {onclick}>
                     { "Next post"}
                 </button>
-    
-    
-                <p>{ state.value }</p>
+
+                <Suspense {fallback}>
+                    <Content />
+                </Suspense>
     
                 <p>{"Date: 12.3.2000"} </p>
                 <h2 >
@@ -58,8 +88,11 @@ pub fn app() -> Html {
             </div>
             </>
         };
-    }else {
-    return html! {
+    } else {
+
+        let fallback = html! {<div>{"Loading..."}</div>};
+        return html! {
+
         <>
         <div>
 
@@ -70,7 +103,9 @@ pub fn app() -> Html {
             <button {onclick}>
                 { "Next post"}
             </button>
-            <p>{ state.value }</p>
+                <Suspense {fallback}>
+                    <Content />
+                </Suspense>
 
             <p>{"Date: 12.3.2018"} </p>
             <h2 >
