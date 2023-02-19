@@ -29,8 +29,11 @@ async fn hello() -> impl Responder {
 }
 
 
+
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+
     HttpServer::new(move || {
         App::new()
         .service(actix_fs::Files::new("/dist", "./frontend/dist"))
