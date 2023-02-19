@@ -14,8 +14,6 @@ struct Blog {
 #[function_component]
 fn Blogkomponentti() -> HtmlResult {
     async fn fetch_blog() -> Blog {
-
-
         let blogs: Blog = reqwest
             ::get("https://jsonplaceholder.typicode.com/posts/1").await
             .unwrap()
@@ -54,11 +52,9 @@ fn Blogkomponentti() -> HtmlResult {
 
 #[function_component(App)]
 pub fn app() -> Html {
-    
-    
-        let fallback = html! { <div>{"Loading..."}</div> };
+    let fallback = html! { <div>{"Loading..."}</div> };
 
-        return html! {
+    return html! {
             
             <>
             <div>
@@ -72,6 +68,4 @@ pub fn app() -> Html {
             </div>
             </>
         };
-    
-        
 }
