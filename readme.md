@@ -1,4 +1,4 @@
-### Building and running with docker
+# Building and running with docker
 
 ##  docker build -t rust_app .
 
