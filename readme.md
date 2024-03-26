@@ -2,16 +2,24 @@
 
 
 ### Running with Docker
-```docker build -t rust_app```
+```
+docker build -t rust_app
+```
 
-```docker run -d -p 3000:3000 rust_app```
+```
+docker run -d -p 3000:3000 rust_app
+```
 
 
 ### Running locally
 
-```cd frontend/ && trunk build  && cd ..```
+```
+cd frontend/ && trunk build  && cd ..
+```
 
-```cargo run```
+```
+cargo run
+```
 
 
 
